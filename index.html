@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TOX presenter</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 32 32%27%3E%3Crect width=%2732%27 height=%2732%27 rx=%276%27 fill=%27%23071318%27/%3E%3Cpath d=%27M3 19h7l2-4 3 10 3-17 3 11h8%27 fill=%27none%27 stroke=%27%233ddc84%27 stroke-width=%272.4%27 stroke-linejoin=%27round%27/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Barlow+Condensed:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/host.css">
+<script src="js/config.js"></script>
+<script src="vendor/qr.js"></script>
+</head>
+<body class="host">
+<div id="viewport">
+  <div id="stage">
+    <header id="bar">
+      <div class="brand"><span class="num">TOX</span><span id="crumb"></span></div>
+      <div class="joinbar" id="joinbar">
+        <span>Join at</span><b id="join-short"></b>
+        <span>PIN</span><span class="pin num" id="pin-small"></span>
+        <span class="count" id="count-small"></span>
+        <span id="conn"></span>
+      </div>
+    </header>
+    <main id="slide" aria-live="polite"></main>
+    <footer id="foot">
+      <div id="evidence" class="evidence"></div>
+      <div id="hint"></div>
+      <div id="pager"><button id="prev" type="button" aria-label="Previous">‹</button><span id="pos" class="num"></span><button id="next" type="button" aria-label="Next">›</button></div>
+    </footer>
+    <div id="trace-wrap" class="hidden">
+      <canvas id="trace" width="2400" height="200" aria-hidden="true"></canvas>
+      <div class="readout">
+        <div class="answered"><b id="answered">0/0</b>answered</div>
+        <div class="secs" id="secs" role="timer">30</div>
+      </div>
+    </div>
+    <div id="join-pop" class="overlay hidden"></div>
+    <div id="help" class="overlay hidden">
+      <h2>Presenter keys</h2>
+      <dl>
+        <dt>→  Space  PgDn</dt><dd>Next: opens a round, reveals, shows the leaderboard, then moves on</dd>
+        <dt>←  PgUp</dt><dd>Back one slide</dd>
+        <dt>J</dt><dd>Show or hide the join QR code</dd>
+        <dt>H</dt><dd>Hide or show live answer counts during a round</dd>
+        <dt>L</dt><dd>Back to the lobby</dd>
+        <dt>F</dt><dd>Full screen</dd>
+        <dt>Esc</dt><dd>Close a card or this panel</dd>
+      </dl>
+    </div>
+  </div>
+</div>
+<script type="module" src="js/host.js"></script>
+</body>
+</html>
