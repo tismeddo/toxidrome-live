@@ -1,4 +1,4 @@
-import { REFS, DECK_CHIPS } from "./refs.js?v=202610241715";
+import { REFS, DECK_CHIPS } from "./refs.js?v=202610241724";
 
 export function chipIdsFor(deckSlide) {
   return (deckSlide && DECK_CHIPS[String(deckSlide)]) || [];

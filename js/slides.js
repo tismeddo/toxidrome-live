@@ -148,14 +148,6 @@ export const SLIDES = [
     options: ["BB, ACEi, CCB, clonidine", "ACEi, CCB, BB, clonidine", "Clonidine, BB, CCB, ACEi", "BB, CCB, clonidine, ACEi"],
     answer: 2 },
 
-  { type: "cardio", deck: 19, title: "Patients 10–13: who took what", q: "q7",
-    items: [
-      { who: P10_13[0], dx: "Clonidine", detail: "Bradycardia, hypotension, miosis and respiratory depression" },
-      { who: P10_13[1], dx: "β-blocker", detail: "Bradycardia, hypotension, hypoglycemia, especially non-selective agents like propranolol. Second-highest mortality" },
-      { who: P10_13[2], dx: "Calcium channel blocker", detail: "Profound hypotension, bradycardia, shock, refractory acidosis; hyperglycemia because β-islet cells need calcium to release insulin. Highest mortality", key: true },
-      { who: P10_13[3], dx: "ACE inhibitor", detail: "Low lethality; high K⁺ and renal dysfunction, hypotension, can have refractory tachycardia" },
-    ]},
-
   { type: "question", id: "q9", deck: 20, revealDeck: 21, title: "Next best step",
     stem: "The right patient goes on VA-ECMO.",
     list: P10_13,
@@ -166,6 +158,14 @@ export const SLIDES = [
       "Atropine to 1, glucagon to 2, IV lipids to 3, methylene blue to 4",
       "High-dose insulin to 1, methylene blue to 2, glucagon to 3, pacer pads on 4"],
     answer: 1, dense: true },
+
+  { type: "cardio", deck: 19, title: "Patients 10–13: who took what", q: "q7",
+    items: [
+      { who: P10_13[0], dx: "Clonidine", detail: "Bradycardia, hypotension, miosis and respiratory depression" },
+      { who: P10_13[1], dx: "β-blocker", detail: "Bradycardia, hypotension, hypoglycemia, especially non-selective agents like propranolol. Second-highest mortality" },
+      { who: P10_13[2], dx: "Calcium channel blocker", detail: "Profound hypotension, bradycardia, shock, refractory acidosis; hyperglycemia because β-islet cells need calcium to release insulin. Highest mortality", key: true },
+      { who: P10_13[3], dx: "ACE inhibitor", detail: "Low lethality; high K⁺ and renal dysfunction, hypotension, can have refractory tachycardia" },
+    ]},
 
   { type: "background", title: "Background: β-blocker and CCB shock",
     points: [

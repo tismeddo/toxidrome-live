@@ -1,8 +1,8 @@
-import { createBackend, backendMode } from "./backend.js?v=202610241715";
-import { SLIDES, QUESTIONS, QUESTION_BY_ID, LETTERS, ROUND_MS, scoreFor, standings } from "./slides.js?v=202610241715";
-import { REFERENCE_LIST } from "./refs.js?v=202610241715";
-import { chipIdsFor, renderChips, closeCard, cardOpen, openCard } from "./evidence.js?v=202610241715";
-import { REFS } from "./refs.js?v=202610241715";
+import { createBackend, backendMode } from "./backend.js?v=202610241724";
+import { SLIDES, QUESTIONS, QUESTION_BY_ID, LETTERS, ROUND_MS, scoreFor, standings } from "./slides.js?v=202610241724";
+import { REFERENCE_LIST } from "./refs.js?v=202610241724";
+import { chipIdsFor, renderChips, closeCard, cardOpen, openCard } from "./evidence.js?v=202610241724";
+import { REFS } from "./refs.js?v=202610241724";
 
 const MODE = backendMode();
 const SKEY = "toxlive-host-v1-" + MODE;
