@@ -1,7 +1,7 @@
-import { createBackend, backendMode } from "./backend.js?v=202610241626";
-import { SLIDES, QUESTIONS, QUESTION_BY_ID, LETTERS, standings } from "./slides.js?v=202610241626";
-import { chipIdsFor, renderChips, openCard } from "./evidence.js?v=202610241626";
-import { REFS } from "./refs.js?v=202610241626";
+import { createBackend, backendMode } from "./backend.js?v=202610241638";
+import { SLIDES, QUESTIONS, QUESTION_BY_ID, LETTERS, standings } from "./slides.js?v=202610241638";
+import { chipIdsFor, renderChips, openCard } from "./evidence.js?v=202610241638";
+import { REFS } from "./refs.js?v=202610241638";
 
 const params = new URLSearchParams(location.search);
 const LKEY = "toxlive-player-" + backendMode();
@@ -129,7 +129,7 @@ function paint() {
   }
   // lobby or a regular slide
   const slide = state?.idx >= 0 ? SLIDES[state.idx] : null;
-  if (slide?.type === "background" || slide?.type === "discuss") {
+  if (slide?.type === "background") {
     return show(h("h1", { text: (t => /^[a-z]/.test(t) ? t[0].toUpperCase() + t.slice(1) : t)(slide.title.replace(/^Background: /, "")) }),
       h("p", { class: "muted", text: "Further reading from the slide on screen." }),
       h("div", { class: "reading-list" }, slide.reading.map(id => {
