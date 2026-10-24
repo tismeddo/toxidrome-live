@@ -91,8 +91,8 @@ export const REFS = {
   "title": "Organophosphate poisoning (review)",
   "badge": "Review · Lancet",
   "cite": "Eddleston M, Buckley NA, Eyer P, Dawson AH. Management of acute organophosphorus pesticide poisoning. Lancet. 2008;371(9612):597-607.",
-  "url": "https://pubmed.ncbi.nlm.nih.gov/?term=Eddleston+Management+of+acute+organophosphorus+pesticide+poisoning+Lancet+2008",
-  "link_label": "PubMed search",
+  "url": "https://pubmed.ncbi.nlm.nih.gov/17706760/",
+  "link_label": "PubMed 17706760",
   "findings": [
    "Atropine first: rapid dose-doubling until chest clear, HR >80, SBP >80 mm Hg",
    "Oximes are adjuncts; clinical benefit remains uncertain",
@@ -284,8 +284,8 @@ export const REFS = {
   "title": "Toxic alcohols (review)",
   "badge": "Review · NEJM",
   "cite": "Kraut JA, Mullins ME. Toxic alcohols. N Engl J Med. 2018;378(3):270-280.",
-  "url": "https://pubmed.ncbi.nlm.nih.gov/?term=Kraut+Mullins+Toxic+Alcohols+N+Engl+J+Med+2018",
-  "link_label": "PubMed search",
+  "url": "https://doi.org/10.1056/NEJMra1615295",
+  "link_label": "doi:10.1056/NEJMra1615295",
   "findings": [
    "Osmolal gap is high early; anion gap rises as toxic metabolites accumulate",
    "Ethylene glycol → glycolate/oxalate → AKI (calcium oxalate). Methanol → formate → optic nerve injury",
@@ -471,6 +471,35 @@ export const REFS = {
    "Critical Care Toxicology, 2nd ed. (Brent et al., Springer, 2017). ICU-focused"
   ],
   "bottom": "Goldfrank's for depth, Olson at the bedside, Brent for the ICU."
+ },
+ "acmt2015": {
+  "tag": "ACMT 2015",
+  "title": "Salicylates: management priorities",
+  "badge": "Guidance document · American College of Medical Toxicology",
+  "cite": "American College of Medical Toxicology. Guidance document: management priorities in salicylate toxicity. J Med Toxicol. 2015.",
+  "url": "https://pubmed.ncbi.nlm.nih.gov/25715929/",
+  "link_label": "PubMed 25715929",
+  "findings": [
+   "If intubation can't be avoided, keep the high minute ventilation and low PCO₂ the patient had before",
+   "An IV bicarbonate bolus around intubation is reasonable to hold blood pH near 7.45–7.5",
+   "Run a bicarbonate infusion even when early respiratory alkalosis has made the patient mildly alkalemic",
+   "Keep the patient euvolemic and involve nephrology early"
+  ],
+  "bottom": "Plan the ventilator settings and the bicarbonate before you intubate."
+ },
+ "liebelt1995": {
+  "tag": "Liebelt 1995",
+  "title": "Lead aVR in TCA overdose",
+  "badge": "Prospective cohort · n = 79",
+  "cite": "Liebelt EL, Francis PD, Woolf AD. ECG lead aVR versus QRS interval in predicting seizures and arrhythmias in acute tricyclic antidepressant toxicity. Ann Emerg Med. 1995;26(2):195-201.",
+  "url": "https://doi.org/10.1016/S0196-0644(95)70151-6",
+  "link_label": "doi:10.1016/S0196-0644(95)70151-6",
+  "findings": [
+   "Terminal R wave in aVR ≥3 mm: sensitivity 81%, positive predictive value 43% for seizures or arrhythmias",
+   "QRS ≥100 ms: sensitivity 82%, positive predictive value 35%",
+   "R wave in aVR ≥3 mm was the only ECG variable that significantly predicted these outcomes"
+  ],
+  "bottom": "Read aVR as well as the QRS: a terminal R ≥3 mm flags sodium-channel blockade."
  }
 };
 export const DECK_CHIPS = {"6": ["chyka2005", "proudfoot2004", "juurlink2015", "stolbach2008", "mccabe2017", "palmer2020"], "7": ["palmer2020", "juurlink2015", "proudfoot2004", "textbooks"], "11": ["eddleston2008", "eddleston2009", "pawar2006", "borron2007", "boyer2005"], "12": ["boyer2005", "dunkley2003", "strawn2007", "burns2000", "arens2018", "fda2011", "eddleston2008"], "13": ["dunkley2003", "boyer2005", "strawn2007", "textbooks"], "15": ["brent1999", "brent2001", "roberts2015", "ghannoum2023", "kraut2018"], "16": ["kraut2018", "ghannoum2023", "roberts2015", "textbooks"], "19": ["levine2007", "seger2002", "stonge2017", "aha2023"], "21": ["stonge2017", "engebretsen2011", "bailey2003", "gosselin2016", "masson2012", "weiner2020", "aha2023"], "23": ["boehnert1985", "bruccoleri2016", "proudfoot2004", "ghannoum2023", "kraut2018"], "24": ["extrip", "aha2023", "textbooks"]};
@@ -501,7 +530,7 @@ export const REFERENCE_LIST = [
  },
  {
   "cite": "Eddleston M, Buckley NA, Eyer P, Dawson AH. Management of acute organophosphorus pesticide poisoning. Lancet. 2008;371(9612):597-607.",
-  "url": "https://pubmed.ncbi.nlm.nih.gov/?term=Eddleston+Management+of+acute+organophosphorus+pesticide+poisoning+Lancet+2008"
+  "url": "https://pubmed.ncbi.nlm.nih.gov/17706760/"
  },
  {
   "cite": "Eddleston M, Eyer P, Worek F, et al. Pralidoxime in acute organophosphorus insecticide poisoning: a randomised controlled trial. PLoS Med. 2009;6(6):e1000104.",
@@ -557,7 +586,7 @@ export const REFERENCE_LIST = [
  },
  {
   "cite": "Kraut JA, Mullins ME. Toxic alcohols. N Engl J Med. 2018;378(3):270-280.",
-  "url": "https://pubmed.ncbi.nlm.nih.gov/?term=Kraut+Mullins+Toxic+Alcohols+N+Engl+J+Med+2018"
+  "url": "https://doi.org/10.1056/NEJMra1615295"
  },
  {
   "cite": "Levine M, Boyer EW, Pozner CN, et al. Assessment of hyperglycemia after calcium channel blocker overdoses involving diltiazem or verapamil. Crit Care Med. 2007;35(9):2071-2075.",
@@ -606,6 +635,14 @@ export const REFERENCE_LIST = [
  {
   "cite": "Ghannoum M, Hoffman RS, Gosselin S, Nolin TD, Lavergne V, Roberts DM. Use of extracorporeal treatments in the management of poisonings. Kidney Int. 2018;94(4):682-688.",
   "url": "https://pubmed.ncbi.nlm.nih.gov/29958694/"
+ },
+ {
+  "cite": "American College of Medical Toxicology. Guidance document: management priorities in salicylate toxicity. J Med Toxicol. 2015.",
+  "url": "https://pubmed.ncbi.nlm.nih.gov/25715929/"
+ },
+ {
+  "cite": "Liebelt EL, Francis PD, Woolf AD. ECG lead aVR versus QRS interval in predicting seizures and arrhythmias in acute tricyclic antidepressant toxicity. Ann Emerg Med. 1995;26(2):195-201.",
+  "url": "https://doi.org/10.1016/S0196-0644(95)70151-6"
  },
  {
   "cite": "Decker BS, Goldfarb DS, Dargan PI, et al. Extracorporeal treatment for lithium poisoning: systematic review and recommendations from the EXTRIP workgroup. Clin J Am Soc Nephrol. 2015;10(5):875-887.",

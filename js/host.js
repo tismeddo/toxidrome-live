@@ -1,7 +1,8 @@
 import { createBackend, backendMode } from "./backend.js";
 import { SLIDES, QUESTIONS, QUESTION_BY_ID, LETTERS, ROUND_MS, scoreFor, standings } from "./slides.js";
 import { REFERENCE_LIST } from "./refs.js";
-import { chipIdsFor, renderChips, closeCard, cardOpen } from "./evidence.js";
+import { chipIdsFor, renderChips, closeCard, cardOpen, openCard } from "./evidence.js";
+import { REFS } from "./refs.js";
 
 const MODE = backendMode();
 const SKEY = "toxlive-host-v1-" + MODE;
@@ -367,6 +368,21 @@ const RENDER = {
     main.append(h("h1", { class: "slide-title", text: s.title }));
     main.append(h("div", { class: "images" + (s.images.length > 1 ? " two" : "") }, s.images.map(([src, alt]) => h("figure", {}, h("img", { src, alt })))));
   },
+  background(main, s) {
+    main.append(h("h1", { class: "slide-title", text: s.title }));
+    main.append(h("div", { class: "bg" },
+      h("div", { class: "bg-points" + (s.points.length > 4 ? " tight" : "") }, s.points.map(([head, text]) => h("section", {}, h("h3", { text: head }), h("p", { text })))),
+      h("aside", { class: "reading" },
+        h("h3", { text: "Further reading" }),
+        h("p", { class: "reading-sub", text: "Scan with your phone camera, or open it in the game." }),
+        s.reading.map(id => {
+          const r = REFS[id];
+          const qr = h("span", { class: "rq" });
+          qr.innerHTML = window.makeQRSvg(r.url, { level: "M", margin: 2 });
+          return h("button", { type: "button", class: "read-tile", onclick: () => openCard(id) }, qr,
+            h("span", { class: "rt" }, h("b", { text: r.title }), h("span", { text: r.tag })));
+        }))));
+  },
   list(main, s) {
     main.append(h("h1", { class: "slide-title", text: s.title }), h("ul", { class: "druglist" }, s.items.map(t => h("li", { text: t }))));
   },
@@ -474,9 +490,15 @@ addEventListener("keydown", e => {
   else if (k === "Escape") closeOverlays();
   else if (k === "f" || k === "F") (document.fullscreenElement ? document.exitFullscreen() : document.documentElement.requestFullscreen()).catch(() => {});
   else if (k === "j" || k === "J") toggleJoinPop();
+  else if (k === "e" || k === "E") endRound();
   else if (k === "h" || k === "H") { showLive = !showLive; const s = SLIDES[idx]; if (s?.type === "question") updateLive(s); }
   else if (k === "l" || k === "L") { if (!(SLIDES[idx]?.type === "question" && rounds[SLIDES[idx].id] === "open")) go(-1); }
   else if (k === "?") $("#help").classList.toggle("hidden");
 });
 $("#next").addEventListener("click", next);
+$("#end-round").addEventListener("click", e => { e.currentTarget.blur(); endRound(); });
+function endRound() {
+  const s = SLIDES[idx];
+  if (s?.type === "question" && rounds[s.id] === "open") reveal(s);
+}
 $("#prev").addEventListener("click", prev);

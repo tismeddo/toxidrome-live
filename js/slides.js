@@ -60,6 +60,15 @@ export const SLIDES = [
   { type: "images", deck: 7, title: "Salicylates: mechanism, presentation, testing, treatment",
     images: [["img/salicylate-mechanism.png", "Salicylate mechanism of toxicity and clinical presentation by phase"], ["img/salicylate-testing-treatment.png", "Salicylate diagnostic testing, treatment and dialysis indications"]] },
 
+  { type: "background", title: "Background: salicylates",
+    points: [
+      ["Two acid–base hits", "Direct medullary stimulation drives an early respiratory alkalosis. Uncoupled oxidative phosphorylation then builds an anion-gap metabolic acidosis and heat."],
+      ["Acidemia pulls salicylate into the brain", "Salicylic acid (pKa ≈3) is more non-ionized as pH falls, so more crosses into the CNS. The same serum level is more dangerous at a lower pH."],
+      ["Alkalinize blood and urine", "IV bicarbonate keeps salicylate ionized in blood and traps it in urine. Replete potassium, or the kidney won't make alkaline urine."],
+      ["Intubation is the dangerous moment", "Losing the patient's own hyperventilation drops pH fast. Match the minute ventilation, give bicarbonate around intubation, and line up dialysis."],
+    ],
+    reading: ["palmer2020", "juurlink2015", "acmt2015"] },
+
   { type: "question", id: "q4", deck: 8, title: "Patients 2–5",
     stem: "A frantic pharmacist hands you a syringe of physostigmine. You now frantically look for a patient who may need it. Four patients sit in the more acute area of the ER and have already required heavy doses of benzodiazepines.",
     ask: "Which patient requires this medication?",
@@ -90,6 +99,15 @@ export const SLIDES = [
   { type: "images", deck: 13, title: "NMS vs serotonin syndrome, and the classic toxidromes",
     images: [["img/nms-vs-serotonin.png", "Neuroleptic malignant syndrome versus serotonin syndrome comparison table"], ["img/toxidrome-table.png", "Toxidrome table: vitals, pupils, skin and mental status by toxidrome"]] },
 
+  { type: "background", title: "Background: toxidromes and their antidotes",
+    points: [
+      ["Skin moisture splits the hyperadrenergic patients", "Anticholinergic: hot, dry, flushed, urinary retention, quiet bowel. Sympathomimetic: similar vitals, but diaphoretic."],
+      ["Cholinergic: the killer Bs", "Bronchorrhea, bronchospasm and bradycardia kill. Atropine is titrated until the chest is clear; pupil size is not the target."],
+      ["Serotonin toxicity or NMS", "Serotonin: onset in hours, clonus and hyperreflexia, a serotonergic drug. NMS: onset over days, lead-pipe rigidity and slow reflexes, a dopamine antagonist."],
+      ["Physostigmine treats the cause", "It crosses into the CNS and reverses anticholinergic delirium. Avoid it when the QRS is wide or a TCA is suspected."],
+    ],
+    reading: ["boyer2005", "dunkley2003", "eddleston2008"] },
+
   { type: "question", id: "q6", deck: 14, title: "Patients 6–9",
     stem: "The ER doctor pulls you to the geri unit where they are housing the “drunks.” He asks which patient you think needs to be dialyzed immediately so he can have his resident drop a trialysis.",
     options: [
@@ -109,6 +127,15 @@ export const SLIDES = [
     ]},
 
   { type: "images", deck: 16, title: "The alcohols compared", images: [["img/toxic-alcohols.png", "Ethanol, isopropanol, methanol and ethylene glycol compared"]] },
+
+  { type: "background", title: "Background: toxic alcohols",
+    points: [
+      ["Calculate the osmolal gap", "Measured − (2 Na + glucose/18 + BUN/2.8). Tonight's labs: 330 − (280 + 10 + 10) = 30."],
+      ["The gaps trade places", "Early, the parent alcohol raises the osmolal gap. As ADH turns it into acids, the anion gap rises and the osmolal gap falls, so a normal osmolal gap doesn't exclude a late presentation."],
+      ["The metabolites do the damage", "Methanol → formic acid: optic nerve and basal ganglia. Ethylene glycol → glycolate and oxalate: acidosis, calcium-oxalate AKI, hypocalcemia. Isopropanol → acetone: ketosis without acidosis."],
+      ["Block, then clear", "Fomepizole stops new acid from forming; dialysis removes the alcohol and the acid already made. Add folate for methanol, thiamine and pyridoxine for ethylene glycol."],
+    ],
+    reading: ["kraut2018", "brent1999", "ghannoum2023"] },
 
   { type: "question", id: "q7", deck: 17, title: "Patients 10–13",
     stem: "The charge nurse pulls you into fast track, which is now ironically named. Patients have already been intubated, lightly sedated, and are on high-dose norepinephrine with persistent shock. The cardiothoracic attending and perfusionist bust through the doors holding ECMO cannulas.",
@@ -140,6 +167,16 @@ export const SLIDES = [
       "High-dose insulin to 1, methylene blue to 2, glucagon to 3, pacer pads on 4"],
     answer: 1, dense: true },
 
+  { type: "background", title: "Background: β-blocker and CCB shock",
+    points: [
+      ["Same vitals, different glucose", "CCBs block insulin release from β-islet cells, so glucose rises with severity. β-blockers, especially propranolol, can drop it."],
+      ["Dihydropyridine or not", "Amlodipine mainly dilates vessels; verapamil and diltiazem also slow the heart and weaken contraction. Selectivity is lost in large overdoses."],
+      ["Why high-dose insulin works", "The shocked heart shifts to burning glucose but can't take it up. Insulin restores fuel and contractility; pair it with vasopressors and dextrose."],
+      ["Glucagon goes around the β receptor", "It raises cAMP through its own receptor: a reasonable bridge in β-blocker poisoning. Vomiting is common."],
+      ["ECMO is a bridge to clearance", "Drug-induced shock reverses once the drug is metabolized, so VA-ECMO can rescue patients who fail maximal therapy."],
+    ],
+    reading: ["stonge2017", "aha2023", "engebretsen2011"] },
+
   { type: "question", id: "q10", deck: 22, revealDeck: 23, title: "Running low on bicarb",
     stem: "Things are finally starting to settle and most of the patients seem stable. Despite Dr. Marin's best efforts, bicarb pushes are now in short supply.",
     ask: "Which of these patients does NOT require bicarbonate?",
@@ -149,6 +186,15 @@ export const SLIDES = [
       "22-year-old male with osmolar gap of 35, CO₂ of 9 and Cr of 10",
       "28-year-old female with bradycardia, hypotension, CO₂ of 9, on triple pressors pending VA-ECMO"],
     answer: 2 },
+
+  { type: "background", title: "Background: sodium-channel blockade",
+    points: [
+      ["TCAs block fast sodium channels", "Conduction slows: a wide QRS, a terminal R wave in aVR, then hypotension and ventricular arrhythmias."],
+      ["The ECG predicts trouble", "QRS ≥100 ms: seizures in 34%; ventricular arrhythmias only at ≥160 ms. A terminal R in aVR ≥3 mm was the strongest predictor in a later cohort."],
+      ["Bicarbonate works two ways", "The sodium load and the alkalemia together counteract the channel block. Repeat boluses guided by QRS narrowing."],
+      ["Where it fits tonight", "Salicylates: alkalinize to trap and excrete the drug. TCAs: treat the sodium-channel block. Ethylene glycol with renal failure: dialysis clears the alcohol and its acids."],
+    ],
+    reading: ["boehnert1985", "liebelt1995", "bruccoleri2016"] },
 
   { type: "list", deck: 24, title: "Review: tonight's ingestions",
     items: ["Methanol", "Isopropyl alcohol", "Ethanol", "Ethylene glycol", "TCA", "Lithium", "CCB", "Clonidine", "BB", "ACEi", "Salicylates", "Sulfonylureas", "Metformin"] },

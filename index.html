@@ -34,6 +34,7 @@
     <div id="trace-wrap" class="hidden">
       <canvas id="trace" width="2400" height="200" aria-hidden="true"></canvas>
       <div class="readout">
+        <button id="end-round" class="end-btn" type="button" title="End the round now (E)">End round</button>
         <div class="answered"><b id="answered">0/0</b>answered</div>
         <div class="secs" id="secs" role="timer">30</div>
       </div>
@@ -44,6 +45,7 @@
       <dl>
         <dt>→  Space  PgDn</dt><dd>Next: opens a round, reveals, shows the leaderboard, then moves on</dd>
         <dt>←  PgUp</dt><dd>Back one slide</dd>
+        <dt>E</dt><dd>End the round now and reveal the answer (same as → during a round)</dd>
         <dt>J</dt><dd>Show or hide the join QR code</dd>
         <dt>H</dt><dd>Hide or show live answer counts during a round</dd>
         <dt>L</dt><dd>Back to the lobby</dd>

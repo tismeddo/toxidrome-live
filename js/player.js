@@ -1,6 +1,7 @@
 import { createBackend, backendMode } from "./backend.js";
 import { SLIDES, QUESTIONS, QUESTION_BY_ID, LETTERS, standings } from "./slides.js";
-import { chipIdsFor, renderChips } from "./evidence.js";
+import { chipIdsFor, renderChips, openCard } from "./evidence.js";
+import { REFS } from "./refs.js";
 
 const params = new URLSearchParams(location.search);
 const LKEY = "toxlive-player-" + backendMode();
@@ -128,6 +129,19 @@ function paint() {
   }
   // lobby or a regular slide
   const slide = state?.idx >= 0 ? SLIDES[state.idx] : null;
+  if (slide?.type === "background") {
+    return show(h("h1", { text: (t => /^[a-z]/.test(t) ? t[0].toUpperCase() + t.slice(1) : t)(slide.title.replace(/^Background: /, "")) }),
+      h("p", { class: "muted", text: "Further reading from the slide on screen." }),
+      h("div", { class: "reading-list" }, slide.reading.map(id => {
+        const r = REFS[id];
+        return h("article", { class: "read-item" },
+          h("b", { text: r.title }), h("span", { class: "muted", text: r.tag }),
+          h("div", { class: "read-actions" },
+            h("a", { href: r.url, target: "_blank", rel: "noopener", text: "Open paper ↗" }),
+            h("button", { type: "button", text: "Summary", onclick: () => openCard(id) })));
+      })),
+      stats());
+  }
   const chips = h("div", { class: "evidence" });
   renderChips(chips, chipIdsFor(slide?.deck), "Evidence on screen now");
   show(h("h1", { text: `You're in, ${myName}.` }),

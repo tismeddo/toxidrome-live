@@ -10,7 +10,10 @@ A web version of the TOX lecture. The presenter screen runs the slides; the audi
 1. Open the site on the presentation laptop, press **F** for full screen.
 2. The lobby shows the QR code and PIN. Names appear as people join; click a name to remove it.
 3. Press **→** (or a clicker's next button) to move through the lecture. On a question slide, each press advances: open the round, reveal the answer, leaderboard, next slide.
-4. **J** shows the join code at any time. **H** hides the live answer counts. **?** lists all keys.
+4. To end a round early (say someone left and the rest have answered), click **End round** next to the timer, or press **E** or →.
+5. **J** shows the join code at any time. **H** hides the live answer counts. **?** lists all keys.
+
+Each section ends with a background slide: the key concepts plus QR codes to the core papers. Phones show the same papers as tap-to-open links.
 
 Optional: `index.html?dur=20` for 20-second rounds.
 

@@ -72,7 +72,7 @@ h1.slide-title { font-family: var(--display); font-weight: 600; font-size: 60px;
 .summary b { color: var(--ink); }
 
 /* timer: a sweep trace */
-#trace-wrap { position: absolute; left: 0; right: 0; bottom: 0; height: 110px; display: grid; grid-template-columns: 1fr 360px; align-items: center;
+#trace-wrap { position: absolute; left: 0; right: 0; bottom: 0; height: 110px; display: grid; grid-template-columns: 1fr 540px; align-items: center;
   background: linear-gradient(transparent, rgba(7,19,24,.9) 30%); padding: 0 40px 10px 0; }
 #trace { width: 100%; height: 100px; display: block; }
 .readout { display: flex; align-items: baseline; justify-content: flex-end; gap: 26px; }
@@ -177,3 +177,25 @@ h1.slide-title { font-family: var(--display); font-weight: 600; font-size: 60px;
 .setup { max-width: 760px; margin: 12vh auto; padding: 0 24px; font-size: 20px; line-height: 1.5; }
 .setup h1 { font-family: var(--display); font-size: 54px; margin: 0 0 12px; }
 .setup code { background: var(--panel); padding: 2px 6px; border-radius: 4px; }
+
+.end-btn { background: rgba(7,19,24,.6); border: 2px solid var(--muted); color: var(--ink); border-radius: 8px; padding: 10px 20px;
+  font-size: 20px; font-weight: 700; cursor: pointer; align-self: center; }
+.end-btn:hover { border-color: var(--ink); }
+
+/* background slides */
+.bg { display: grid; grid-template-columns: 1fr 560px; gap: 56px; align-items: start; }
+.bg-points { display: grid; gap: 22px; }
+.bg-points h3 { font-family: var(--display); font-weight: 600; font-size: 30px; margin: 0 0 4px; color: var(--c); line-height: 1.1; }
+.bg-points p { margin: 0; font-size: 22px; line-height: 1.42; max-width: 60ch; }
+.reading h3 { font-family: var(--display); font-weight: 600; font-size: 30px; margin: 0; }
+.reading-sub { color: var(--muted); font-size: 17px; margin: 2px 0 14px; }
+.read-tile { display: grid; grid-template-columns: 150px 1fr; gap: 18px; align-items: center; width: 100%; text-align: left;
+  background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 10px; margin-bottom: 12px; cursor: pointer; }
+.read-tile:hover { border-color: var(--muted); }
+.read-tile .rq { display: block; background: #fff; border-radius: 6px; padding: 4px; }
+.read-tile .rq svg { display: block; width: 100%; height: auto; }
+.read-tile .rt { display: grid; gap: 4px; }
+.read-tile .rt b { font-size: 21px; line-height: 1.25; }
+.read-tile .rt span { color: var(--muted); font-size: 17px; }
+.bg-points.tight { gap: 16px; }
+.bg-points.tight p { font-size: 21px; }
