@@ -13,7 +13,9 @@ A web version of the TOX lecture. The presenter screen runs the slides; the audi
 4. To end a round early (say someone left and the rest have answered), click **End round** next to the timer, or press **E** or →.
 5. **J** shows the join code at any time. **H** hides the live answer counts. **?** lists all keys.
 
-Each section ends with a background slide: the key concepts plus QR codes to the core papers. Phones show the same papers as tap-to-open links.
+After each question's leaderboard comes its discussion slide: why each option is right or wrong, 2–3 background points, and QR codes to the core papers. Phones show the same papers as tap-to-open links. Questions 7 and 8 share one discussion slide, because explaining 7 gives away 8.
+
+After editing any file, run `python3 stamp.py` before committing so browsers load the new version.
 
 Optional: `index.html?dur=20` for 20-second rounds.
 

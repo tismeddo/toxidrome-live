@@ -1,8 +1,8 @@
-import { createBackend, backendMode } from "./backend.js";
-import { SLIDES, QUESTIONS, QUESTION_BY_ID, LETTERS, ROUND_MS, scoreFor, standings } from "./slides.js";
-import { REFERENCE_LIST } from "./refs.js";
-import { chipIdsFor, renderChips, closeCard, cardOpen, openCard } from "./evidence.js";
-import { REFS } from "./refs.js";
+import { createBackend, backendMode } from "./backend.js?v=202610241626";
+import { SLIDES, QUESTIONS, QUESTION_BY_ID, LETTERS, ROUND_MS, scoreFor, standings } from "./slides.js?v=202610241626";
+import { REFERENCE_LIST } from "./refs.js?v=202610241626";
+import { chipIdsFor, renderChips, closeCard, cardOpen, openCard } from "./evidence.js?v=202610241626";
+import { REFS } from "./refs.js?v=202610241626";
 
 const MODE = backendMode();
 const SKEY = "toxlive-host-v1-" + MODE;
@@ -368,20 +368,23 @@ const RENDER = {
     main.append(h("h1", { class: "slide-title", text: s.title }));
     main.append(h("div", { class: "images" + (s.images.length > 1 ? " two" : "") }, s.images.map(([src, alt]) => h("figure", {}, h("img", { src, alt })))));
   },
+  discuss(main, s) {
+    const q = QUESTION_BY_ID[s.q];
+    const mark = i => (s.marks === "numbers" ? String(i + 1) : LETTERS[i]);
+    main.append(h("h1", { class: "slide-title", text: s.title }));
+    main.append(h("div", { class: "bg" },
+      h("div", { class: "disc" },
+        h("ol", { class: "why" }, s.why.map(([label, reason], i) => h("li", { class: `${OPT_CLASS[i]}${i === q.answer ? " key" : ""}` },
+          h("span", { class: "l", text: mark(i) }),
+          h("span", { class: "wt" }, h("b", { text: label }), i === q.answer ? h("span", { class: "tick", "aria-label": "Correct answer", text: "✓" }) : null, " " + reason)))),
+        h("div", { class: "bg-points compact" }, s.points.map(([head, text]) => h("section", {}, h("h3", { text: head }), h("p", { text }))))),
+      readingAside(s.reading)));
+  },
   background(main, s) {
     main.append(h("h1", { class: "slide-title", text: s.title }));
     main.append(h("div", { class: "bg" },
       h("div", { class: "bg-points" + (s.points.length > 4 ? " tight" : "") }, s.points.map(([head, text]) => h("section", {}, h("h3", { text: head }), h("p", { text })))),
-      h("aside", { class: "reading" },
-        h("h3", { text: "Further reading" }),
-        h("p", { class: "reading-sub", text: "Scan with your phone camera, or open it in the game." }),
-        s.reading.map(id => {
-          const r = REFS[id];
-          const qr = h("span", { class: "rq" });
-          qr.innerHTML = window.makeQRSvg(r.url, { level: "M", margin: 2 });
-          return h("button", { type: "button", class: "read-tile", onclick: () => openCard(id) }, qr,
-            h("span", { class: "rt" }, h("b", { text: r.title }), h("span", { text: r.tag })));
-        }))));
+      readingAside(s.reading)));
   },
   list(main, s) {
     main.append(h("h1", { class: "slide-title", text: s.title }), h("ul", { class: "druglist" }, s.items.map(t => h("li", { text: t }))));
@@ -400,6 +403,19 @@ const RENDER = {
     main.append(h("ol", { class: "reflist" }, REFERENCE_LIST.map(r => h("li", {}, r.cite + " ", h("a", { href: r.url, target: "_blank", rel: "noopener", text: "link" })))));
   },
 };
+
+function readingAside(ids) {
+  return h("aside", { class: "reading" },
+    h("h3", { text: "Further reading" }),
+    h("p", { class: "reading-sub", text: "Scan with your phone camera, or open it in the game." }),
+    ids.map(id => {
+      const r = REFS[id];
+      const qr = h("span", { class: "rq" });
+      qr.innerHTML = window.makeQRSvg(r.url, { level: "M", margin: 2 });
+      return h("button", { type: "button", class: "read-tile", onclick: () => openCard(id) }, qr,
+        h("span", { class: "rt" }, h("b", { text: r.title }), h("span", { text: r.tag })));
+    }));
+}
 
 function paintCounts(counts) {
   const total = counts.reduce((a, b) => a + b, 0) || 1;
