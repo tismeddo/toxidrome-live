@@ -94,11 +94,28 @@ export const REFS = {
   "url": "https://pubmed.ncbi.nlm.nih.gov/17706760/",
   "link_label": "PubMed 17706760",
   "findings": [
-   "Atropine first: rapid dose-doubling until chest clear, HR >80, SBP >80 mm Hg",
-   "Oximes are adjuncts; clinical benefit remains uncertain",
-   "Early airway control for respiratory failure; bronchorrhea + bronchospasm drive hypoxia"
+   "About 200,000 deaths a year worldwide; case fatality is usually above 15%",
+   "Early resuscitation with atropine, oxygen, respiratory support and fluids, to improve oxygen delivery to tissues",
+   "The role of oximes is not completely clear: they may help only with specific pesticides or moderate poisoning",
+   "Fifty years after atropine, oximes and diazepam came into use, how best to give them is still unknown"
   ],
-  "bottom": "Atropine dries the lungs; pralidoxime is the adjunct in the pharmacist's bag."
+  "bottom": "Atropine and the airway come first. For how to dose it, see Eddleston 2004."
+ },
+ "eddleston2004": {
+  "tag": "Eddleston 2004",
+  "title": "Atropine: the treatment protocol",
+  "badge": "Treatment protocol · Critical Care",
+  "cite": "Eddleston M, Dawson A, Karalliedde L, et al. Early management after self-poisoning with an organophosphorus or carbamate pesticide: a treatment protocol for junior doctors. Crit Care. 2004;8(6):R391-R397.",
+  "url": "https://doi.org/10.1186/cc2953",
+  "link_label": "doi:10.1186/cc2953",
+  "findings": [
+   "Atropine 1.8–3 mg IV, then double the dose each time there is no response. Do not simply repeat the initial dose",
+   "Five end-points: clear chest with no wheeze, HR >80, systolic >80 mm Hg, dry axillae, pupils no longer pinpoint",
+   "Most of the five must improve, not just one. Chest, heart rate and blood pressure matter most",
+   "Pupil dilatation is not required and is sometimes delayed: patients do not die from constricted pupils",
+   "In maintenance, don't track heart rate and pupil size as toxicity markers; tachycardia is not a contraindication to atropine"
+  ],
+  "bottom": "Titrate to a clear chest, HR >80 and systolic >80. Pupils should stop being pinpoint, not become dilated."
  },
  "eddleston2009": {
   "tag": "Eddleston 2009",
@@ -502,7 +519,7 @@ export const REFS = {
   "bottom": "Read aVR as well as the QRS: a terminal R ≥3 mm flags sodium-channel blockade."
  }
 };
-export const DECK_CHIPS = {"6": ["chyka2005", "proudfoot2004", "juurlink2015", "stolbach2008", "mccabe2017", "palmer2020"], "7": ["palmer2020", "juurlink2015", "proudfoot2004", "textbooks"], "11": ["eddleston2008", "eddleston2009", "pawar2006", "borron2007", "boyer2005"], "12": ["boyer2005", "dunkley2003", "strawn2007", "burns2000", "arens2018", "fda2011", "eddleston2008"], "13": ["dunkley2003", "boyer2005", "strawn2007", "textbooks"], "15": ["brent1999", "brent2001", "roberts2015", "ghannoum2023", "kraut2018"], "16": ["kraut2018", "ghannoum2023", "roberts2015", "textbooks"], "19": ["levine2007", "seger2002", "stonge2017", "aha2023"], "21": ["stonge2017", "engebretsen2011", "bailey2003", "gosselin2016", "masson2012", "weiner2020", "aha2023"], "23": ["boehnert1985", "bruccoleri2016", "proudfoot2004", "ghannoum2023", "kraut2018"], "24": ["extrip", "aha2023", "textbooks"]};
+export const DECK_CHIPS = {"6": ["chyka2005", "proudfoot2004", "juurlink2015", "stolbach2008", "mccabe2017", "palmer2020"], "7": ["palmer2020", "juurlink2015", "proudfoot2004", "textbooks"], "11": ["eddleston2008", "eddleston2004", "eddleston2009", "pawar2006", "borron2007", "boyer2005"], "12": ["boyer2005", "dunkley2003", "strawn2007", "burns2000", "arens2018", "fda2011", "eddleston2008", "eddleston2004"], "13": ["dunkley2003", "boyer2005", "strawn2007", "textbooks"], "15": ["brent1999", "brent2001", "roberts2015", "ghannoum2023", "kraut2018"], "16": ["kraut2018", "ghannoum2023", "roberts2015", "textbooks"], "19": ["levine2007", "seger2002", "stonge2017", "aha2023"], "21": ["stonge2017", "engebretsen2011", "bailey2003", "gosselin2016", "masson2012", "weiner2020", "aha2023"], "23": ["boehnert1985", "bruccoleri2016", "proudfoot2004", "ghannoum2023", "kraut2018"], "24": ["extrip", "aha2023", "textbooks"]};
 export const REFERENCE_LIST = [
  {
   "cite": "Chyka PA, Seger D, Krenzelok EP, Vale JA; AACT/EAPCCT. Position paper: single-dose activated charcoal. Clin Toxicol (Phila). 2005;43(2):61-87.",
@@ -531,6 +548,10 @@ export const REFERENCE_LIST = [
  {
   "cite": "Eddleston M, Buckley NA, Eyer P, Dawson AH. Management of acute organophosphorus pesticide poisoning. Lancet. 2008;371(9612):597-607.",
   "url": "https://pubmed.ncbi.nlm.nih.gov/17706760/"
+ },
+ {
+  "cite": "Eddleston M, Dawson A, Karalliedde L, et al. Early management after self-poisoning with an organophosphorus or carbamate pesticide: a treatment protocol for junior doctors. Crit Care. 2004;8(6):R391-R397.",
+  "url": "https://doi.org/10.1186/cc2953"
  },
  {
   "cite": "Eddleston M, Eyer P, Worek F, et al. Pralidoxime in acute organophosphorus insecticide poisoning: a randomised controlled trial. PLoS Med. 2009;6(6):e1000104.",

@@ -1,8 +1,8 @@
-import { createBackend, backendMode } from "./backend.js?v=202610241638";
-import { SLIDES, QUESTIONS, QUESTION_BY_ID, LETTERS, ROUND_MS, scoreFor, standings } from "./slides.js?v=202610241638";
-import { REFERENCE_LIST } from "./refs.js?v=202610241638";
-import { chipIdsFor, renderChips, closeCard, cardOpen, openCard } from "./evidence.js?v=202610241638";
-import { REFS } from "./refs.js?v=202610241638";
+import { createBackend, backendMode } from "./backend.js?v=202610241715";
+import { SLIDES, QUESTIONS, QUESTION_BY_ID, LETTERS, ROUND_MS, scoreFor, standings } from "./slides.js?v=202610241715";
+import { REFERENCE_LIST } from "./refs.js?v=202610241715";
+import { chipIdsFor, renderChips, closeCard, cardOpen, openCard } from "./evidence.js?v=202610241715";
+import { REFS } from "./refs.js?v=202610241715";
 
 const MODE = backendMode();
 const SKEY = "toxlive-host-v1-" + MODE;
@@ -25,7 +25,8 @@ const h = (tag, attrs = {}, ...kids) => {
 
 let api, pin;
 let idx = -1;                  // -1 = lobby
-let rounds = {};               // qid -> "open" | "revealed" | "board"
+let rounds = {};               // qid -> "open" | "done"  (round lifecycle)
+let views = {};                // qid -> "revealed" | "board"  (what a finished question shows now)
 let players = {}, scores = {}, results = {}, state = null, live = {};
 let unsubLive = null, raf = null, revealing = false, showLive = true, botTimers = [];
 
@@ -78,7 +79,8 @@ function showSetup(e) {
 async function startSession(forceNew) {
   const saved = JSON.parse(localStorage.getItem(SKEY) || "null");
   if (!forceNew && saved?.pin && (await api.get(`games/${saved.pin}/host`)) === api.uid) {
-    ({ pin } = saved); idx = saved.idx ?? -1; rounds = saved.rounds || {};
+    ({ pin } = saved); idx = saved.idx ?? -1; views = saved.views || {};
+    rounds = Object.fromEntries(Object.entries(saved.rounds || {}).map(([k, v]) => [k, v === "open" ? "open" : "done"]));
     return;
   }
   for (let i = 0; i < 25; i++) {
@@ -86,11 +88,11 @@ async function startSession(forceNew) {
     if (await api.claim(`games/${p}/host`, api.uid)) { pin = p; break; }
   }
   if (!pin) throw new Error("Could not create a game PIN");
-  idx = -1; rounds = {};
+  idx = -1; rounds = {}; views = {};
   await api.set(`games/${pin}/meta`, { createdAt: api.TS });
   save();
 }
-function save() { localStorage.setItem(SKEY, JSON.stringify({ pin, idx, rounds })); }
+function save() { localStorage.setItem(SKEY, JSON.stringify({ pin, idx, rounds, views })); }
 
 function joinURL() {
   const u = new URL("play.html", location.href);
@@ -107,26 +109,46 @@ function shortJoin() {
 /* ---------------- navigation ---------------- */
 const isFinal = () => SLIDES[idx]?.type === "final";
 
+// What a question slide is showing: "ask" (not run yet), "open", "revealed", "board".
+function viewOf(q) {
+  if (!q || q.type !== "question") return null;
+  if (rounds[q.id] === "open") return "open";
+  if (!rounds[q.id]) return "ask";
+  return views[q.id] || "revealed";
+}
+
 async function next() {
   if (closeOverlays()) return;
   if (idx === -1) return go(0);
   const s = SLIDES[idx];
   if (s.type === "question") {
-    const st = rounds[s.id];
-    if (!st) return openRound(s);
-    if (st === "open") return reveal(s);
-    if (st === "revealed") return showBoard(s);
+    const v = viewOf(s);
+    if (v === "ask") return openRound(s);
+    if (v === "open") return reveal(s);
+    if (v === "revealed") return setView(s, "board");   // finished round: question -> leaderboard
   }
   if (idx < SLIDES.length - 1) go(idx + 1);
 }
 function prev() {
   if (closeOverlays()) return;
   const s = SLIDES[idx];
-  if (s?.type === "question" && rounds[s.id] === "open") return; // finish the round first
+  if (s?.type === "question") {
+    if (viewOf(s) === "open") return;                   // finish the round first
+    if (viewOf(s) === "board") return setView(s, "revealed"); // leaderboard -> back to the question
+  }
   if (idx > -1) go(idx - 1);
+}
+async function setView(q, v) {
+  views[q.id] = v; save();
+  await publishState();
+  render();
 }
 async function go(i) {
   idx = i; save(); stopTimer();
+  // Landing on a finished question (from either direction) shows the question with its answer,
+  // not the leaderboard, so it can be reread during discussion.
+  const s = SLIDES[i];
+  if (s?.type === "question" && rounds[s.id] === "done") views[s.id] = "revealed";
   await publishState();
   render();
 }
@@ -135,8 +157,8 @@ async function publishState() {
   let st;
   if (idx === -1) st = { phase: "lobby", idx };
   else if (s.type === "final") st = { phase: "final", idx };
-  else if (s.type === "question" && rounds[s.id] === "revealed") st = { phase: "reveal", qid: s.id, idx };
-  else if (s.type === "question" && rounds[s.id] === "board") st = { phase: "leaderboard", qid: s.id, idx };
+  else if (viewOf(s) === "revealed") st = { phase: "reveal", qid: s.id, idx };
+  else if (viewOf(s) === "board") st = { phase: "leaderboard", qid: s.id, idx };
   else st = { phase: "slide", idx, deck: s.deck || null };
   await api.set(`games/${pin}/state`, st);
 }
@@ -183,16 +205,12 @@ async function reveal(q) {
   upd[`results/${q.id}`] = Object.keys(res).length ? res : null;
   upd.state = { phase: "reveal", qid: q.id, idx };
   results[q.id] = res;
-  rounds[q.id] = "revealed"; save();
+  rounds[q.id] = "done"; views[q.id] = "revealed"; save();
   await api.update(`games/${pin}`, upd);
   revealing = false;
   render();
 }
-async function showBoard(q) {
-  rounds[q.id] = "board"; save();
-  await api.set(`games/${pin}/state`, { phase: "leaderboard", qid: q.id, idx });
-  render();
-}
+
 
 /* practice players for rehearsal */
 async function addBots() {
@@ -293,7 +311,7 @@ const RENDER = {
     main.append(h("h1", { class: "slide-title", text: s.title }), h("ul", { class: "bullets" }, s.bullets.map(b => h("li", { text: b }))));
   },
   question(main, q) {
-    const st = rounds[q.id];
+    const st = viewOf(q);
     const wrap = h("div", { class: q.dense ? "dense" : "" });
     main.append(wrap);
     if (st === "board") { wrap.append(h("h1", { class: "slide-title", text: "Leaderboard" })); return renderBoard(wrap, q); }
@@ -307,7 +325,7 @@ const RENDER = {
       q.options.map((t, i) => h("div", { class: `opt ${OPT_CLASS[i]}${i === q.answer ? " correct" : ""}`, "data-i": i },
         h("span", { class: "fill" }), h("span", { class: "letter", text: LETTERS[i] }), h("span", { class: "text" }, h("span", { class: "tick", "aria-label": "Correct answer", text: "✓" }), t), h("span", { class: "count num" }))));
     wrap.append(opts);
-    if (!st) $("#hint").textContent = `Press → to open the ${DUR / 1000}-second round`;
+    if (st === "ask") $("#hint").textContent = `Press → to open the ${DUR / 1000}-second round`;
     if (st === "open") updateLive(q);
     if (st === "revealed") {
       const res = results[q.id] || {};

@@ -102,11 +102,11 @@ export const SLIDES = [
   { type: "background", title: "Background: toxidromes and their antidotes",
     points: [
       ["Skin moisture splits the hyperadrenergic patients", "Anticholinergic: hot, dry, flushed, urinary retention, quiet bowel. Sympathomimetic: similar vitals, but diaphoretic."],
-      ["Cholinergic: the killer Bs", "Bronchorrhea, bronchospasm and bradycardia kill. Atropine is titrated until the chest is clear; pupil size is not the target."],
+      ["Cholinergic: the killer Bs", "Bronchorrhea, bronchospasm and bradycardia kill. Titrate atropine to a clear chest, HR >80 and systolic >80. Pupils should stop being pinpoint; dilating them is not the goal."],
       ["Serotonin toxicity or NMS", "Serotonin: onset in hours, clonus and hyperreflexia, a serotonergic drug. NMS: onset over days, lead-pipe rigidity and slow reflexes, a dopamine antagonist."],
       ["Physostigmine treats the cause", "It crosses into the CNS and reverses anticholinergic delirium. Avoid it when the QRS is wide or a TCA is suspected."],
     ],
-    reading: ["boyer2005", "dunkley2003", "eddleston2008"] },
+    reading: ["boyer2005", "dunkley2003", "eddleston2004"] },
 
   { type: "question", id: "q6", deck: 14, title: "Patients 6–9",
     stem: "The ER doctor pulls you to the geri unit where they are housing the “drunks.” He asks which patient you think needs to be dialyzed immediately so he can have his resident drop a trialysis.",
