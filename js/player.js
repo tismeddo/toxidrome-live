@@ -1,7 +1,7 @@
-import { createBackend, backendMode } from "./backend.js?v=202610241724";
-import { SLIDES, QUESTIONS, QUESTION_BY_ID, LETTERS, standings } from "./slides.js?v=202610241724";
-import { chipIdsFor, renderChips, openCard } from "./evidence.js?v=202610241724";
-import { REFS } from "./refs.js?v=202610241724";
+import { createBackend, backendMode } from "./backend.js?v=202610241801";
+import { SLIDES, QUESTIONS, QUESTION_BY_ID, LETTERS, standings } from "./slides.js?v=202610241801";
+import { chipIdsFor, renderChips, openCard } from "./evidence.js?v=202610241801";
+import { REFS } from "./refs.js?v=202610241801";
 
 const params = new URLSearchParams(location.search);
 const LKEY = "toxlive-player-" + backendMode();

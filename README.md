@@ -12,6 +12,7 @@ A web version of the TOX lecture. The presenter screen runs the slides; the audi
 3. Press **→** (or a clicker's next button) to move through the lecture. On a question slide, each press advances: open the round, reveal the answer, leaderboard, next slide.
 4. To end a round early (say someone left and the rest have answered), click **End round** next to the timer, or press **E** or →.
 5. **J** shows the join code at any time. **H** hides the live answer counts. **?** lists all keys.
+6. Between groups, click **Home** (top left, or **L**) to return to the lobby. It keeps showing the last game's standings until you click **Start a new game**, which issues a fresh PIN and clears the scores.
 
 Each section ends with a background slide: the key concepts plus QR codes to the core papers. Phones show the same papers as tap-to-open links.
 

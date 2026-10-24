@@ -147,8 +147,8 @@ h1.slide-title { font-family: var(--display); font-weight: 600; font-size: 60px;
 .roster button { background: var(--panel-2); border: 1px solid var(--line); border-radius: 999px; padding: 6px 16px; font-size: 20px; cursor: pointer; }
 .roster button:hover { border-color: var(--b); }
 .roster .bot { color: var(--muted); }
-.lobby-tools { display: flex; gap: 12px; margin-top: 18px; }
-.tool { background: none; border: 1px solid var(--line); color: var(--muted); border-radius: 8px; padding: 8px 14px; font-size: 17px; cursor: pointer; }
+.lobby-tools { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px; }
+.tool { background: none; border: 1px solid var(--line); color: var(--muted); border-radius: 8px; padding: 8px 14px; font-size: 17px; cursor: pointer; white-space: nowrap; }
 .tool:hover { color: var(--ink); border-color: var(--muted); }
 
 /* final */
@@ -199,3 +199,24 @@ h1.slide-title { font-family: var(--display); font-weight: 600; font-size: 60px;
 .read-tile .rt span { color: var(--muted); font-size: 17px; }
 .bg-points.tight { gap: 16px; }
 .bg-points.tight p { font-size: 21px; }
+
+/* home button */
+.home-btn { background: none; border: 1px solid var(--line); color: var(--muted); border-radius: 8px;
+  padding: 5px 13px; font-size: 16px; font-weight: 700; cursor: pointer; }
+.home-btn:hover:not([disabled]) { color: var(--ink); border-color: var(--muted); }
+.home-btn[disabled] { opacity: .3; cursor: default; }
+
+/* last game's standings, shown on the lobby until a new game is started */
+.lobby.with-board { grid-template-columns: minmax(0, .95fr) minmax(0, 1fr) 360px; gap: 46px; }
+.lobby.with-board .qr { width: 360px; }
+.lobby.with-board .big { font-size: 112px; }
+.lobby.with-board .roster { max-height: 92px; }
+.lobby-board h3 { font-family: var(--display); font-weight: 600; font-size: 32px; margin: 0; }
+.lobby-board .sub { color: var(--muted); font-size: 17px; margin: 2px 0 16px; }
+.lobby-board .row { display: grid; grid-template-columns: 52px 1fr 124px; align-items: center; background: var(--panel);
+  border-radius: 8px; padding: 8px 16px; font-size: 22px; margin-bottom: 7px; }
+.lobby-board .row.top { background: var(--panel-2); box-shadow: inset 3px 0 0 var(--d); }
+.lobby-board .rk { font-family: var(--display); font-weight: 700; font-size: 28px; color: var(--muted); }
+.lobby-board .nm { font-weight: 700; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.lobby-board .sc { font-family: var(--display); font-size: 28px; font-weight: 700; text-align: right; }
+.lobby-board .more { color: var(--muted); font-size: 17px; margin-top: 10px; }

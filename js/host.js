@@ -1,8 +1,8 @@
-import { createBackend, backendMode } from "./backend.js?v=202610241724";
-import { SLIDES, QUESTIONS, QUESTION_BY_ID, LETTERS, ROUND_MS, scoreFor, standings } from "./slides.js?v=202610241724";
-import { REFERENCE_LIST } from "./refs.js?v=202610241724";
-import { chipIdsFor, renderChips, closeCard, cardOpen, openCard } from "./evidence.js?v=202610241724";
-import { REFS } from "./refs.js?v=202610241724";
+import { createBackend, backendMode } from "./backend.js?v=202610241801";
+import { SLIDES, QUESTIONS, QUESTION_BY_ID, LETTERS, ROUND_MS, scoreFor, standings } from "./slides.js?v=202610241801";
+import { REFERENCE_LIST } from "./refs.js?v=202610241801";
+import { chipIdsFor, renderChips, closeCard, cardOpen, openCard } from "./evidence.js?v=202610241801";
+import { REFS } from "./refs.js?v=202610241801";
 
 const MODE = backendMode();
 const SKEY = "toxlive-host-v1-" + MODE;
@@ -290,6 +290,10 @@ function render() {
   $("#pin-small").textContent = pin || "";
   $("#join-short").textContent = shortJoin();
   $("#joinbar").classList.toggle("hidden", idx === -1);
+  const atLobby = idx === -1, mid = SLIDES[idx]?.type === "question" && viewOf(SLIDES[idx]) === "open";
+  $("#home").classList.toggle("hidden", atLobby);
+  $("#home").disabled = mid;
+  $("#home").title = mid ? "End the round first" : "Back to the lobby (L)";
   refreshCounts();
   $("#pos").textContent = idx === -1 ? "Lobby" : `${idx + 1} / ${SLIDES.length}`;
   $("#hint").textContent = "";
@@ -455,6 +459,19 @@ function renderBoard(wrap, q) {
   $("#hint").textContent = "Press → to continue";
 }
 
+function lobbyBoard() {
+  const rows = standings(scores, players);
+  if (!rows.some(r => r.score > 0)) return null;   // nothing played yet
+  return h("div", { class: "lobby-board" },
+    h("h3", { text: "Last game" }),
+    h("p", { class: "sub", text: `${rows.length} ${rows.length === 1 ? "player" : "players"}. Still here until you start a new game.` }),
+    rows.slice(0, 8).map(r => h("div", { class: "row" + (r.rank === 1 ? " top" : "") },
+      h("span", { class: "rk", text: r.rank }),
+      h("span", { class: "nm", text: r.name }),
+      h("span", { class: "sc", text: r.score.toLocaleString() }))),
+    rows.length > 8 ? h("p", { class: "more", text: `+ ${rows.length - 8} more` }) : null);
+}
+
 function renderLobby(main) {
   const url = joinURL();
   const roster = h("div", { class: "roster" });
@@ -466,7 +483,8 @@ function renderLobby(main) {
       onclick: async () => { if (confirm(`Remove ${p.name} from the game?`)) await api.update(`games/${pin}`, { [`players/${id}`]: null, [`scores/${id}`]: null }); } }));
   }
   const hasBots = ids.some(i => i.startsWith("bot_"));
-  main.append(h("div", { class: "lobby" },
+  const board = lobbyBoard();
+  main.append(h("div", { class: "lobby" + (board ? " with-board" : "") },
     h("div", {},
       h("p", { class: "big", text: "TOX" }),
       h("p", { class: "how", text: "Join on your phone: scan the code or go to" }),
@@ -478,6 +496,7 @@ function renderLobby(main) {
         h("button", { class: "tool", type: "button", text: hasBots ? "Remove practice players" : "Add 5 practice players", onclick: () => (hasBots ? removeBots() : addBots()) }),
         h("button", { class: "tool", type: "button", text: "Start a new game", onclick: newGame }),
         h("button", { class: "tool", type: "button", text: "Keys (?)", onclick: () => $("#help").classList.toggle("hidden") }))),
+    board,
     qrBox(url)));
   $("#hint").textContent = `${ids.length} joined. Press → to start`;
 }
@@ -487,7 +506,7 @@ function qrBox(url) {
   return box;
 }
 async function newGame() {
-  if (!confirm("Start a new game? Scores from this game will no longer show here.")) return;
+  if (!confirm("Start a new game?\n\nA new PIN is issued, players rejoin, and the last game's scores are cleared from this screen.")) return;
   stopTimer(); clearBots();
   await startSession(true);
   location.reload();
@@ -510,10 +529,15 @@ addEventListener("keydown", e => {
   else if (k === "j" || k === "J") toggleJoinPop();
   else if (k === "e" || k === "E") endRound();
   else if (k === "h" || k === "H") { showLive = !showLive; const s = SLIDES[idx]; if (s?.type === "question") updateLive(s); }
-  else if (k === "l" || k === "L") { if (!(SLIDES[idx]?.type === "question" && rounds[SLIDES[idx].id] === "open")) go(-1); }
+  else if (k === "l" || k === "L") goHome();
   else if (k === "?") $("#help").classList.toggle("hidden");
 });
 $("#next").addEventListener("click", next);
+$("#home").addEventListener("click", e => { e.currentTarget.blur(); goHome(); });
+function goHome() {
+  if (SLIDES[idx]?.type === "question" && viewOf(SLIDES[idx]) === "open") return; // finish the round first
+  if (idx !== -1) go(-1);
+}
 $("#end-round").addEventListener("click", e => { e.currentTarget.blur(); endRound(); });
 function endRound() {
   const s = SLIDES[idx];

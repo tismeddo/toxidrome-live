@@ -8,16 +8,19 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Barlow+Condensed:wght@500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/base.css?v=202610241724">
-<link rel="stylesheet" href="css/host.css?v=202610241724">
-<script src="js/config.js?v=202610241724"></script>
-<script src="vendor/qr.js?v=202610241724"></script>
+<link rel="stylesheet" href="css/base.css?v=202610241801">
+<link rel="stylesheet" href="css/host.css?v=202610241801">
+<script src="js/config.js?v=202610241801"></script>
+<script src="vendor/qr.js?v=202610241801"></script>
 </head>
 <body class="host">
 <div id="viewport">
   <div id="stage">
     <header id="bar">
-      <div class="brand"><span class="num">TOX</span><span id="crumb"></span></div>
+      <div class="brand">
+        <button id="home" class="home-btn" type="button" title="Back to the lobby (L)">⌂ Home</button>
+        <span class="num">TOX</span><span id="crumb"></span>
+      </div>
       <div class="joinbar" id="joinbar">
         <span>Join at</span><b id="join-short"></b>
         <span>PIN</span><span class="pin num" id="pin-small"></span>
@@ -48,13 +51,13 @@
         <dt>E</dt><dd>End the round now and reveal the answer (same as → during a round)</dd>
         <dt>J</dt><dd>Show or hide the join QR code</dd>
         <dt>H</dt><dd>Hide or show live answer counts during a round</dd>
-        <dt>L</dt><dd>Back to the lobby</dd>
+        <dt>L</dt><dd>Back to the lobby (same as the Home button)</dd>
         <dt>F</dt><dd>Full screen</dd>
         <dt>Esc</dt><dd>Close a card or this panel</dd>
       </dl>
     </div>
   </div>
 </div>
-<script type="module" src="js/host.js?v=202610241724"></script>
+<script type="module" src="js/host.js?v=202610241801"></script>
 </body>
 </html>
